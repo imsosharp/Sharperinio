@@ -100,8 +100,9 @@ namespace TheHatinEvelynn
             Menu.SubMenu("Combo").AddItem(new MenuItem("UseQCombo", "Use Q").SetValue(true));
             //Menu.SubMenu("Combo").AddItem(new MenuItem("UseWCombo", "Use W").SetValue(true));
             Menu.SubMenu("Combo").AddItem(new MenuItem("UseECombo", "Use E").SetValue(true));
-            Menu.SubMenu("Combo").AddItem(new MenuItem("UseRCombo", "User R").SetValue(true));
+            Menu.SubMenu("Combo").AddItem(new MenuItem("UseRCombo", "Use R").SetValue(true));
             Menu.SubMenu("Combo").AddItem(new MenuItem("UseItemsCombo", "Use Items").SetValue(true));
+            Menu.SubMenu("Combo").AddItem(new MenuItem("UseIgniteCombo", "Use Ignite").SetValue(true));
             Menu.SubMenu("Combo").AddItem(new MenuItem("ComboActive", "Active").SetValue(new KeyBind(32, KeyBindType.Press)));
             #endregion
 
@@ -220,13 +221,13 @@ namespace TheHatinEvelynn
                 if (ObjectManager.Player.Distance(target) <= DFG.Range && DFG.IsReady() && Menu.Item("UseDFGItems").GetValue<bool>() && target.Health > GetComboDamage(target))
                     DFG.Cast(target);
 
-                if (ObjectManager.Player.Distance(target) < Q.Range && Q.IsReady())
+                if (ObjectManager.Player.Distance(target) < Q.Range && Q.IsReady() && Menu.Item("UseQCombo").GetValue<bool>())
                     Q.Cast(Menu.Item("UsePackets").GetValue<bool>()); 
-                if (ObjectManager.Player.Distance(target) < E.Range && E.IsReady())
+                if (ObjectManager.Player.Distance(target) < E.Range && E.IsReady() && Menu.Item("UseECombo").GetValue<bool>())
                     E.CastOnUnit(target, Menu.Item("UsePackets").GetValue<bool>());
-                if (ObjectManager.Player.Distance(target) < R.Range && R.IsReady() && GetComboDamage(target) > target.Health);
+                if (ObjectManager.Player.Distance(target) < R.Range && R.IsReady() && GetComboDamage(target) > target.Health && Menu.Item("UseRCombo").GetValue<bool>());
                     R.Cast(target, Menu.Item("UsePackets").GetValue<bool>(), true);
-                if (IgniteSlot != SpellSlot.Unknown && Player.SummonerSpellbook.CanUseSpell(IgniteSlot) == SpellState.Ready)
+                if (IgniteSlot != SpellSlot.Unknown && Player.SummonerSpellbook.CanUseSpell(IgniteSlot) == SpellState.Ready && Menu.Item("UseIgniteCombo").GetValue<bool>())
                     if(GetComboDamage(target) > target.Health)
                       Player.SummonerSpellbook.CastSpell(IgniteSlot, target);
                 /*if(ObjectManager.Player.HasBuffOfType(BuffType.Slow) && Menu.Item("SmartW").GetValue<bool>() && W.IsReady())
