@@ -62,7 +62,7 @@ namespace TheHatinEvelynn
 
             //Create the spells
             #region
-            Q = new Spell(SpellSlot.Q, 500f);
+            Q = new Spell(SpellSlot.Q, 700f);
             W = new Spell(SpellSlot.W, 0);
             E = new Spell(SpellSlot.E, 225f);
             R = new Spell(SpellSlot.R, 650f);
@@ -402,12 +402,11 @@ namespace TheHatinEvelynn
         }
 
 
-        //credits to metaphorce for this
-        private static readonly string[] MinionNames =
-        {
-            "Worm", "Dragon", "LizardElder", "AncientGolem", "TT_Spiderboss", "TTNGolem", "TTNWolf", "TTNWraith",
-            "SRU_Blue", "SRU_Gromp", "SRU_Murkwolf", "SRU_Razorbeak", "SRU_Red", "SRU_Krug", "SRU_Dragon", "SRU_Baron"
-        };
+        private static readonly string[] MinionNames = { 
+              "TT_Spiderboss", "TTNGolem", "TTNWolf", "TTNWraith", 
+              "SRU_Blue", "SRU_Gromp", "SRU_Murkwolf", "SRU_Razorbeak", 
+              "SRU_Red", "SRU_Krug", "SRU_Dragon", "SRU_Baron", "Sru_Crab" };
+
         public static Obj_AI_Minion GetNearest(Vector3 pos)
         {
             var minions =
