@@ -7,6 +7,5 @@ C:\Users\Thoki\Documents\Visual Studio 2013\Projects\TheHatinEvelynn\TheHatinEve
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\TheHatinEvelynn\TheHatinEvelynn\bin\Release\SharpDX.dll
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\TheHatinEvelynn\TheHatinEvelynn\bin\Release\SharpDX.Direct3D9.dll
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\TheHatinEvelynn\TheHatinEvelynn\bin\Release\LeagueSharp.xml
-C:\Users\Thoki\Documents\Visual Studio 2013\Projects\TheHatinEvelynn\TheHatinEvelynn\obj\Debug\TheHatinEvelynn.csprojResolveAssemblyReference.cache
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\TheHatinEvelynn\TheHatinEvelynn\obj\Debug\TheHatinEvelynn.exe
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\TheHatinEvelynn\TheHatinEvelynn\obj\Debug\TheHatinEvelynn.pdb

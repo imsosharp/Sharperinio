@@ -57,7 +57,7 @@ namespace TheHatinEvelynn
         {
             Player = ObjectManager.Player;
             if (Player.BaseSkinName != ChampionName) return;
-            numSkins.Add("Evelynn", 3);
+            numSkins.Add("Evelynn", 4);
             Game.PrintChat(WelcomeMsg);
 
             //Create the spells
@@ -241,7 +241,7 @@ namespace TheHatinEvelynn
             if (target != null)
             {
                
-                if (ObjectManager.Player.Distance(target) <= DFG.Range && DFG.IsReady() && Menu.Item("UseDFGItems").GetValue<bool>() && target.Health < GetComboDamage(target) && target.IsValidTarget(DFG.Range));
+                if (ObjectManager.Player.Distance(target) <= DFG.Range && DFG.IsReady() && Menu.Item("UseDFGItems").GetValue<bool>() && target.Health < GetComboDamage(target) && target.IsValidTarget(DFG.Range))
                     DFG.Cast(target);
                 if (ObjectManager.Player.Distance(target) <= Cutlass.Range && Cutlass.IsReady() && Menu.Item("UseCutlassItems").GetValue<bool>() && target.IsValidTarget(Cutlass.Range))
                     Cutlass.Cast(target);
