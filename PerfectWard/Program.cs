@@ -36,6 +36,7 @@ namespace PerfectWard
 
             Menu = new Menu("PerfectWard", "menu", true);
             Menu.AddItem(new MenuItem("on", "Enabled").SetValue(true));
+            Menu.AddItem(new MenuItem("on1", "Draw when Im near").SetValue(false));
             Menu.AddToMainMenu();
 
             standingCoords = new List<Vector3>();
@@ -51,11 +52,22 @@ namespace PerfectWard
             if (!Menu.Item("on").GetValue<bool>())
                 return;
 
-            foreach (var StandingCoords in standingCoords)
-                Utility.DrawCircle(StandingCoords, 50f, Color.Red);
+            if (Menu.Item("on1").GetValue<bool>())
+            {
+                foreach (var StandingCoords in standingCoords.Where(StandingCoords => Vector3.Distance(Player.ServerPosition, StandingCoords) <= 1500))
+                    Utility.DrawCircle(StandingCoords, 50f, Color.Red);
 
-            foreach (var PlaceCoords in placeCoords)
-                Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+                foreach (var PlaceCoords in placeCoords.Where(PlaceCoords => Vector3.Distance(Player.ServerPosition, PlaceCoords) <= 1500))
+                    Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+            }
+            else
+            {
+                foreach (var StandingCoords in standingCoords)
+                    Utility.DrawCircle(StandingCoords, 50f, Color.Red);
+
+                foreach (var PlaceCoords in placeCoords)
+                    Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+            }
         }
 
         private static void GetStandingCoords()
