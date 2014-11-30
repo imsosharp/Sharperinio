@@ -1,0 +1,12 @@
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\PerfectWard.exe.config
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\PerfectWard.exe
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\PerfectWard.pdb
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\LeagueSharp.Common.dll
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\LeagueSharp.dll
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\LX-Orbwalker.dll
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\SharpDX.dll
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\SharpDX.Direct3D9.dll
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\LeagueSharp.xml
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\obj\Debug\PerfectWard.csprojResolveAssemblyReference.cache
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\obj\Debug\PerfectWard.exe
+c:\users\thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\obj\Debug\PerfectWard.pdb
