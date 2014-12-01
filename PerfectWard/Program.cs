@@ -19,9 +19,9 @@ namespace PerfectWard
         private static Menu Menu;
         private static List<Vector3> standingCoords;
         private static List<Vector3> placeCoords;
-        private static Items.Item sWard, vWard, sightStone, rSightStone, trinket;
+        private static Items.Item sWard, vWard, sightStone, rSightStone, trinket, gsT, gvT;
         private static int Time;
-        private static float wR = 600f;
+        private static float wR = 1000f;
         private static void Main(string[] args)
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
@@ -38,6 +38,8 @@ namespace PerfectWard
             sightStone = new Items.Item(2049, wR);
             rSightStone = new Items.Item(2045, wR);
             trinket = new Items.Item(3340, wR);
+            gsT = new Items.Item(3361, wR);
+            gvT = new Items.Item(3362, wR);
 
             Menu = new Menu("PerfectWard", "menu", true);
             Menu.AddItem(new MenuItem("on", "Enabled").SetValue(true));
@@ -121,18 +123,34 @@ namespace PerfectWard
                              rSightStone.Cast(PlaceCoords);
                              Time = Environment.TickCount + 5000;
                          }
+                         if (gsT.IsReady() && (Environment.TickCount > Time))
+                         {
+                             gsT.Cast(PlaceCoords);
+                             Time = Environment.TickCount + 5000;
+                         }
                          if(sWard.IsReady() && (Environment.TickCount > Time))
                          {
                              sWard.Cast(PlaceCoords);
                          }
+
                          
 
                      }
                      if(Menu.Item("key1").GetValue<KeyBind>().Active)
                      {
+
                          if (vWard.IsReady())
+                         {
                              vWard.Cast(PlaceCoords);
+                             Time = Environment.TickCount + 5000;
+                         }
+                         if (gvT.IsReady() && (Environment.TickCount > Time))
+                         {
+                             gvT.Cast(PlaceCoords);
+                             Time = Environment.TickCount + 5000;
+                         }
                      }
+
                  }
 
              }

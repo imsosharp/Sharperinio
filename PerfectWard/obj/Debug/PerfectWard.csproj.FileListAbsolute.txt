@@ -7,6 +7,6 @@ C:\Users\Thoki\Documents\Visual Studio 2013\Projects\PerfectWard\PerfectWard\bin
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\SharpDX.dll
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\SharpDX.Direct3D9.dll
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\PerfectWard\PerfectWard\bin\Release\LeagueSharp.xml
-C:\Users\Thoki\Documents\Visual Studio 2013\Projects\PerfectWard\PerfectWard\obj\Debug\PerfectWard.csprojResolveAssemblyReference.cache
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\PerfectWard\PerfectWard\obj\Debug\PerfectWard.exe
 C:\Users\Thoki\Documents\Visual Studio 2013\Projects\PerfectWard\PerfectWard\obj\Debug\PerfectWard.pdb
+C:\Users\Thoki\documents\visual studio 2013\Projects\PerfectWard\PerfectWard\obj\Debug\PerfectWard.csprojResolveAssemblyReference.cache
