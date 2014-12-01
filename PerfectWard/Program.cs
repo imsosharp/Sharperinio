@@ -8,7 +8,6 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using System.Drawing;
 using SharpDX;
-using LX_Orbwalker;
 using Color = System.Drawing.Color;
 
 namespace PerfectWard
