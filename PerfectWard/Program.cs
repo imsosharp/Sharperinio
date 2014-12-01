@@ -19,23 +19,34 @@ namespace PerfectWard
         private static Menu Menu;
         private static List<Vector3> standingCoords;
         private static List<Vector3> placeCoords;
-
+        private static Items.Item sWard, vWard, sightStone, rSightStone, trinket;
+        private static int Time;
+        private static float wR = 600f;
         private static void Main(string[] args)
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
-            Drawing.OnDraw += Drawing_OnDraw;
             Game.PrintChat(WelcomeMsg);
         }
 
         private static void Game_OnGameLoad(EventArgs args)
         {
+                    
             Player = ObjectManager.Player;
-            if (Player.IsDead)
-                return;
+
+            sWard = new Items.Item(2044, wR);
+            vWard = new Items.Item(2043, wR);
+            sightStone = new Items.Item(2049, wR);
+            rSightStone = new Items.Item(2045, wR);
+            trinket = new Items.Item(3340, wR);
 
             Menu = new Menu("PerfectWard", "menu", true);
             Menu.AddItem(new MenuItem("on", "Enabled").SetValue(true));
-            Menu.AddItem(new MenuItem("on1", "Draw when Im near").SetValue(false));
+            Menu.AddItem(new MenuItem("on1", "Draw only if near").SetValue(true));
+            Menu.AddItem(new MenuItem("on2", "Drawing range").SetValue(new Slider(1500, 600, 2000)));
+            Menu.AddItem(new MenuItem("on3", "Draw only stand place").SetValue(true));
+            Menu.AddItem(new MenuItem("key", "Auto place ward").SetValue(new KeyBind("Z".ToArray()[0], KeyBindType.Press)));
+            Menu.AddItem(new MenuItem("key1", "Auto place pink").SetValue(new KeyBind("A".ToArray()[0], KeyBindType.Press)));
+
             Menu.AddToMainMenu();
 
             standingCoords = new List<Vector3>();
@@ -43,31 +54,92 @@ namespace PerfectWard
             GetStandingCoords();
             GetPlaceCoords();
 
+            Drawing.OnDraw += Drawing_OnDraw;
+            Game.OnGameUpdate += Game_OnGameUpdate;
+            
+        }
+        static void Game_OnGameUpdate(EventArgs args)
+        {
+            if (Player.IsDead)
+                return;
+            if (!Menu.Item("on").GetValue<bool>())
+                return;
 
+            PlaceWards();
         }
 
         static void Drawing_OnDraw(EventArgs args)
         {
+            if (Player.IsDead)
+                return;
+
             if (!Menu.Item("on").GetValue<bool>())
                 return;
 
             if (Menu.Item("on1").GetValue<bool>())
             {
-                foreach (var StandingCoords in standingCoords.Where(StandingCoords => Vector3.Distance(Player.ServerPosition, StandingCoords) <= 1500))
+                foreach (var StandingCoords in standingCoords.Where(StandingCoords => Vector3.Distance(Player.ServerPosition, StandingCoords) <= Menu.Item("on2").GetValue<Slider>().Value))
                     Utility.DrawCircle(StandingCoords, 50f, Color.Red);
-
-                foreach (var PlaceCoords in placeCoords.Where(PlaceCoords => Vector3.Distance(Player.ServerPosition, PlaceCoords) <= 1500))
-                    Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+                if (!Menu.Item("on3").GetValue<bool>())
+                {
+                    foreach (var PlaceCoords in placeCoords.Where(PlaceCoords => Vector3.Distance(Player.ServerPosition, PlaceCoords) <= Menu.Item("on2").GetValue<Slider>().Value))
+                        Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+                }
             }
             else
             {
                 foreach (var StandingCoords in standingCoords)
                     Utility.DrawCircle(StandingCoords, 50f, Color.Red);
-
-                foreach (var PlaceCoords in placeCoords)
-                    Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+                if (!Menu.Item("on3").GetValue<bool>())
+                {
+                    foreach (var PlaceCoords in placeCoords)
+                        Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+                }
             }
         }
+        private static void PlaceWards()
+        {
+
+             foreach (var StandingCoords in standingCoords.Where(StandingCoords => Vector3.Distance(Player.ServerPosition, StandingCoords) <= 50))
+             {
+                 foreach(var PlaceCoords in placeCoords.Where(PlaceCoords => Vector3.Distance(Player.ServerPosition, PlaceCoords) <= wR))
+                 {
+                     if(Menu.Item("key").GetValue<KeyBind>().Active)
+                     {
+                         if(trinket.IsReady())
+                         {
+                             trinket.Cast(PlaceCoords);
+                             Time = Environment.TickCount + 5000;
+                         }
+                         if(sightStone.IsReady() && (Environment.TickCount > Time))
+                         {
+                             sightStone.Cast(PlaceCoords);
+                             Time = Environment.TickCount + 5000;
+                         }
+                         if (rSightStone.IsReady() && (Environment.TickCount > Time))
+                         {
+                             rSightStone.Cast(PlaceCoords);
+                             Time = Environment.TickCount + 5000;
+                         }
+                         if(sWard.IsReady() && (Environment.TickCount > Time))
+                         {
+                             sWard.Cast(PlaceCoords);
+                         }
+                         
+
+                     }
+                     if(Menu.Item("key1").GetValue<KeyBind>().Active)
+                     {
+                         if (vWard.IsReady())
+                             vWard.Cast(PlaceCoords);
+                     }
+                 }
+
+             }
+
+
+        }
+
 
         private static void GetStandingCoords()
         {
