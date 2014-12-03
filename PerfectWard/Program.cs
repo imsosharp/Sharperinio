@@ -46,6 +46,7 @@ namespace PerfectWard
             Menu.AddItem(new MenuItem("on1", "Draw only if near").SetValue(true));
             Menu.AddItem(new MenuItem("on2", "Drawing range").SetValue(new Slider(1500, 600, 2000)));
             Menu.AddItem(new MenuItem("on3", "Draw only stand place").SetValue(true));
+            Menu.AddItem(new MenuItem("on4", "Draw auto walk range").SetValue(true));
             Menu.AddItem(new MenuItem("key", "Auto place ward").SetValue(new KeyBind("Z".ToArray()[0], KeyBindType.Press)));
             Menu.AddItem(new MenuItem("key1", "Auto place pink").SetValue(new KeyBind("A".ToArray()[0], KeyBindType.Press)));
 
@@ -78,20 +79,44 @@ namespace PerfectWard
             if (!Menu.Item("on").GetValue<bool>())
                 return;
 
+            //if (Menu.Item("key").GetValue<KeyBind>().Active || Menu.Item("key1").GetValue<KeyBind>().Active)
+                //Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+
             if (Menu.Item("on1").GetValue<bool>())
             {
                 foreach (var StandingCoords in standingCoords.Where(StandingCoords => Vector3.Distance(Player.ServerPosition, StandingCoords) <= Menu.Item("on2").GetValue<Slider>().Value))
+                {
                     Utility.DrawCircle(StandingCoords, 50f, Color.Red);
+                    if (Menu.Item("on4").GetValue<bool>())
+                    {
+                        if (Menu.Item("key").GetValue<KeyBind>().Active || Menu.Item("key1").GetValue<KeyBind>().Active)
+                        {
+                            Utility.DrawCircle(StandingCoords, 500, Color.Yellow);
+                        }
+                    }
+                }
                 if (!Menu.Item("on3").GetValue<bool>())
                 {
                     foreach (var PlaceCoords in placeCoords.Where(PlaceCoords => Vector3.Distance(Player.ServerPosition, PlaceCoords) <= Menu.Item("on2").GetValue<Slider>().Value))
+                    {
                         Utility.DrawCircle(PlaceCoords, 15f, Color.Blue);
+                    }
+                        
                 }
             }
             else
             {
                 foreach (var StandingCoords in standingCoords)
+                {
                     Utility.DrawCircle(StandingCoords, 50f, Color.Red);
+                    if (Menu.Item("on4").GetValue<bool>())
+                    {
+                        if (Menu.Item("key").GetValue<KeyBind>().Active || Menu.Item("key1").GetValue<KeyBind>().Active)
+                        {
+                            Utility.DrawCircle(StandingCoords, 500, Color.Yellow);
+                        }
+                    }
+                }
                 if (!Menu.Item("on3").GetValue<bool>())
                 {
                     foreach (var PlaceCoords in placeCoords)
@@ -102,55 +127,65 @@ namespace PerfectWard
         private static void PlaceWards()
         {
 
-             foreach (var StandingCoords in standingCoords.Where(StandingCoords => Vector3.Distance(Player.ServerPosition, StandingCoords) <= 50))
+             foreach (var StandingCoords in standingCoords.Where(StandingCoords => Vector3.Distance(Player.ServerPosition, StandingCoords) <= 500))
              {
-                 foreach(var PlaceCoords in placeCoords.Where(PlaceCoords => Vector3.Distance(Player.ServerPosition, PlaceCoords) <= wR))
+
+                 if (Menu.Item("key").GetValue<KeyBind>().Active || Menu.Item("key1").GetValue<KeyBind>().Active)
+                    Player.IssueOrder(GameObjectOrder.MoveTo, StandingCoords);
+
+                 if (Vector3.Distance(Player.ServerPosition, StandingCoords) < 50)
                  {
-                     if(Menu.Item("key").GetValue<KeyBind>().Active)
-                     {
-                         if(trinket.IsReady())
-                         {
-                             trinket.Cast(PlaceCoords);
-                             Time = Environment.TickCount + 5000;
-                         }
-                         if(sightStone.IsReady() && (Environment.TickCount > Time))
-                         {
-                             sightStone.Cast(PlaceCoords);
-                             Time = Environment.TickCount + 5000;
-                         }
-                         if (rSightStone.IsReady() && (Environment.TickCount > Time))
-                         {
-                             rSightStone.Cast(PlaceCoords);
-                             Time = Environment.TickCount + 5000;
-                         }
-                         if (gsT.IsReady() && (Environment.TickCount > Time))
-                         {
-                             gsT.Cast(PlaceCoords);
-                             Time = Environment.TickCount + 5000;
-                         }
-                         if(sWard.IsReady() && (Environment.TickCount > Time))
-                         {
-                             sWard.Cast(PlaceCoords);
-                         }
 
-                         
+                     foreach (var PlaceCoords in placeCoords.Where(PlaceCoords => Vector3.Distance(Player.ServerPosition, PlaceCoords) <= wR))
+                     {
+                         if (Menu.Item("key").GetValue<KeyBind>().Active)
+                         {
+
+                             if (trinket.IsReady())
+                             {
+                                 trinket.Cast(PlaceCoords);
+                                 Time = Environment.TickCount + 5000;
+                             }
+                             if (sightStone.IsReady() && (Environment.TickCount > Time))
+                             {
+                                 sightStone.Cast(PlaceCoords);
+                                 Time = Environment.TickCount + 5000;
+                             }
+                             if (rSightStone.IsReady() && (Environment.TickCount > Time))
+                             {
+                                 rSightStone.Cast(PlaceCoords);
+                                 Time = Environment.TickCount + 5000;
+                             }
+                             if (gsT.IsReady() && (Environment.TickCount > Time))
+                             {
+                                 gsT.Cast(PlaceCoords);
+                                 Time = Environment.TickCount + 5000;
+                             }
+                             if (sWard.IsReady() && (Environment.TickCount > Time))
+                             {
+                                 sWard.Cast(PlaceCoords);
+                                 Time = Environment.TickCount + 5000;
+                             }
+
+
+
+                         }
+                         if (Menu.Item("key1").GetValue<KeyBind>().Active)
+                         {
+
+                             if (vWard.IsReady())
+                             {
+                                 vWard.Cast(PlaceCoords);
+                                 Time = Environment.TickCount + 5000;
+                             }
+                             if (gvT.IsReady() && (Environment.TickCount > Time))
+                             {
+                                 gvT.Cast(PlaceCoords);
+                                 Time = Environment.TickCount + 5000;
+                             }
+                         }
 
                      }
-                     if(Menu.Item("key1").GetValue<KeyBind>().Active)
-                     {
-
-                         if (vWard.IsReady())
-                         {
-                             vWard.Cast(PlaceCoords);
-                             Time = Environment.TickCount + 5000;
-                         }
-                         if (gvT.IsReady() && (Environment.TickCount > Time))
-                         {
-                             gvT.Cast(PlaceCoords);
-                             Time = Environment.TickCount + 5000;
-                         }
-                     }
-
                  }
 
              }
