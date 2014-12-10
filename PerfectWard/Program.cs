@@ -47,7 +47,7 @@ namespace PerfectWard
             Menu.AddItem(new MenuItem("on2", "Drawing range").SetValue(new Slider(1500, 600, 2000)));
             Menu.AddItem(new MenuItem("on3", "Draw only stand place").SetValue(true));
             Menu.AddItem(new MenuItem("on4", "Draw auto walk range").SetValue(true));
-            Menu.AddItem(new MenuItem("key", "Auto place ward").SetValue(new KeyBind("Z".ToArray()[0], KeyBindType.Press)));
+            Menu.AddItem(new MenuItem("key", "Auto place ward").SetValue(true));
             Menu.AddItem(new MenuItem("key1", "Auto place pink").SetValue(new KeyBind("A".ToArray()[0], KeyBindType.Press)));
 
             Menu.AddToMainMenu();
